@@ -33,12 +33,12 @@ define([
         _ValueRequiredMixin,
         _ContentContextMixin
     ) {
-        return declare("<%= options.editorName %>", [_Widget, _TemplatedMixin, _WidgetsInTemplateMixin, _CssStateMixin, _ValueRequiredMixin, _ContentContextMixin], {
+        return declare("<%- options.editorName %>", [_Widget, _TemplatedMixin, _WidgetsInTemplateMixin, _CssStateMixin, _ValueRequiredMixin, _ContentContextMixin], {
 
             templateString: '\
 <div class="">\
-	<input style=\"visibility: hidden; font-size: 0;\" type=\"text\" data-dojo-attach-point=\"<%= options.editorName %>Value\" data-dojo-attach-event=\"onchange:_onChange\" />\
-	<main id="facetsSelector"></main>\
+	<input style=\"visibility: hidden; font-size: 0;\" type=\"text\" data-dojo-attach-point=\"<%- options.editorName %>Value\" data-dojo-attach-event=\"onchange:_onChange\" />\
+	<main id="<%- options.editorName %>"></main>\
 </div>',
             intermediateChanges: true,
             value: null,
@@ -55,22 +55,22 @@ define([
                 return context.language;
             },
             _loadScriptFiles: function () {
-                if (!document.getElementById('facets-selector-init-module')) {
+                if (!document.getElementById('<%- options.editorNameLowerCase %>-init-module')) {
                     var vendor = document.createElement('script');
-                    vendor.src = '/ClientResources/Editors/<%= options.editorName %>/chunk-vendors.js';
+                    vendor.src = '/ClientResources/Editors/<%- options.editorName %>/chunk-vendors.js';
                     document.body.appendChild(vendor);
 
                     var editor = document.createElement('script');
                     //editor.type = 'module';
-                    editor.src = '/ClientResources/Editors/<%= options.editorName %>/app.js';
-                    editor.id = "facets-selector-init-module";
+                    editor.src = '/ClientResources/Editors/<%- options.editorName %>/app.js';
+                    editor.id = "<%- options.editorNameLowerCase %>-init-module";
                     document.body.appendChild(editor);
 
                     var intervalId = setInterval(function () {
-                        if (window.facetsselector) {
+                        if (window.<%- options.editorNameLowerCase %>) {
                             // var event = new CustomEvent('facetsselector:serversideupdate', { detail: this.value });
                             // document.body.dispatchEvent(event);
-                            window.facetsselector.init(this.getCurrentLanguage());
+                            window.<%- options.editorNameLowerCase %>.init(this.getCurrentLanguage());
                             clearInterval(intervalId);
                         }
                     }.bind(this), 500);
@@ -78,20 +78,20 @@ define([
                 else {
                     // var event = new CustomEvent('facetsselector:serversideupdate', { detail: this.value });
                     // document.body.dispatchEvent(event);
-                    window.facetsselector.init(this.getCurrentLanguage());
+                    window.<%- options.editorNameLowerCase %>.init(this.getCurrentLanguage());
                 }
             },
             _onClientReady: function () {
-                var event = new CustomEvent('<%= options.editorNameLC %>:serversideupdate', { detail: this.value });
+                var event = new CustomEvent('<%- options.editorNameLowerCase %>:serversideupdate', { detail: this.value });
                 document.body.dispatchEvent(event);
             },
             _setValueAttr: function (value) {
                 this._setValue(value);
-                this.facetsValue.value = value;
+                this.<%- options.editorName %>Value.value = value;
             },
             _onClientChange: function (e, v) {
-                if (this.facetsValue) {
-                    this.facetsValue.value = e.detail;
+                if (this.<%- options.editorName %>Value) {
+                    this.<%- options.editorName %>Value.value = e.detail;
                 }
                 this._setValue(e.detail, true);
             },
@@ -100,12 +100,12 @@ define([
                 this.onChange(this.value);
             },
             _bindEvents: function (myself) {
-                document.body.addEventListener('<%= options.editorNameLC %>:clientsideupdate', this._onClientChange.bind(this));
-                document.body.addEventListener('<%= options.editorNameLC %>:ready', this._onClientReady.bind(this));
+                document.body.addEventListener('<%- options.editorNameLowerCase %>:clientsideupdate', this._onClientChange.bind(this));
+                document.body.addEventListener('<%- options.editorNameLowerCase %>:ready', this._onClientReady.bind(this));
             },
             _setValue: function (value, surpress) {
                 if (!surpress) {
-                    var event = new CustomEvent('<%= options.editorNameLC %>:serversideupdate', { detail: value });
+                    var event = new CustomEvent('<%- options.editorNameLowerCase %>:serversideupdate', { detail: value });
                     document.body.dispatchEvent(event);
                 }
 
@@ -137,7 +137,7 @@ define([
                         head.appendChild(link);
                     }
                 }
-                insertCssLink('/ClientResources/Editors/<%= options.editorName %>/app.css', '<%= options.editorName %>Style');
+                insertCssLink('/ClientResources/Editors/<%- options.editorName %>/app.css', '<%- options.editorName %>Style');
             },
         });
     });

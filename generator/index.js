@@ -2,8 +2,10 @@ module.exports = (api, options, rootOptions) => {
     console.log('options', options);
     console.log('rootOptions', rootOptions);
     api.render('./template', { 
-        editorName: 'generatedEditor',
-        editorNameLC: 'generatededitor',
+        options: {
+            editorName: options.name,
+            editorNameLowerCase: options.name.toLowerCase(),
+        }
     });
 
     api.postProcessFiles(files => {
