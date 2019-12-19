@@ -1,5 +1,5 @@
 {
-  "name": "vue-cli-epi-property-editor",
+  "name": "vue-cli-plugin-epi-property-editor",
   "version": "0.1.0",
   "description": "A vue cli plugin for automating the generation of boilerplate code for implementing Vue based property editors in EPiServer",
   "main": "index.js",
