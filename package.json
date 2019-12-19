@@ -1,0 +1,24 @@
+{
+  "name": "vue-cli-epi-property-editor",
+  "version": "0.1.0",
+  "description": "A vue cli plugin for automating the generation of boilerplate code for implementing Vue based property editors in EPiServer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thjorth/vue-cli-epi-property-editor.git"
+  },
+  "keywords": [
+    "vue",
+    "cli",
+    "episerver"
+  ],
+  "author": "Thomas Hjorth",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/thjorth/vue-cli-epi-property-editor/issues"
+  },
+  "homepage": "https://github.com/thjorth/vue-cli-epi-property-editor#readme"
+}
